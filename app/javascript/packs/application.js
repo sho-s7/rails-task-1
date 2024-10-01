@@ -11,3 +11,20 @@ import "channels"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+//= require jquery
+//= require jquery_ujs
+//= require flatpickr
+//= require flatpickr/l10n/ja
+//= require data-confirm-modal
+
+import flatpickr from 'flatpickr';
+import { Japanese } from "flatpickr/dist/l10n/ja";
+
+document.addEventListener('turbolinks:load', () => {
+    flatpickr.localize(flatpickr.l10ns.ja)
+    flatpickr('.date-field', {
+        dateFormat: 'Y/m/d',
+    });
+});
+

@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="heading d-flex justify-content-between align-items-center">
+        <div><h3>予定一覧</h3></div>
+        <div><%= link_to "新規追加", :new_schedule, class: "btn btn-primary" %></div>
+    </div>
+
+    <div class="index-table table-responsive-sm">
+        <table class="table text-nowrap">
+            <caption>
+                <div class="d-flex justify-content-between">
+                    <p>予定件数 <span><%= @schedules.count %></span>件</p>
+                    <p>本日の日付 <%= Time.zone.today.strftime("%Y/%m/%d") %></p>
+                </div>
+            </caption>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>タイトル</th>
+                    <th>開始日</th>
+                    <th>終了日</th>
+                    <th>終日</th>
+                    <th>更新日時</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% @schedules.each do |schedule| %>
+                    <tr>
+                        <td><%= schedule.id %></td>
+                        <td><%= schedule.title %></td>
+                        <td><%= schedule.start_at.strftime("%Y/%m/%d") %></td>
+                        <td><%= schedule.end_at.strftime("%Y/%m/%d") %></td>
+                        <td>
+                            <% if schedule.all_day == 1 %>◯<% end %>
+                        </td>
+                        <td><%= schedule.updated_at.strftime("%Y/%m/%d %H:%M") %></td>
+                        <td><%= link_to "詳細", schedule %></td>
+                        <td><%= link_to "編集", [:edit, schedule] %></td>
+                        <td><%= link_to "削除", schedule, method: :delete, data:
+                            { confirm: "「#{schedule.title}」を削除してよろしいですか？",
+                              cancel: "キャンセル",
+                              commit: "削除" }, title: "削除確認" %>
+                    </tr>
+                <% end %>
+            <tbody>
+        </table>
+    </div>
+
+</div>
