@@ -1,0 +1,31 @@
+<div class="container">
+    <%= link_to "← 一覧に戻る" , :schedules, class: "return-index" %>
+
+    <div class="heading d-flex justify-content-between align-items-center">
+        <h2><%= @schedule.title %></h2>
+        <%= link_to "編集", [:edit, @schedule], class: "btn btn-primary" %>
+    </div>
+    
+    <div class="show-table-wrapper">
+        <table class="show-table table">
+            <tr>
+                <th>開始日</th>
+                <td><%= @schedule.start_at.strftime("%Y/%m/%d") %></td>
+            </tr>
+            <tr>
+                <th>終了日</th>
+                <td><%= @schedule.end_at.strftime("%Y/%m/%d") %></td>
+            </tr>
+            <tr>
+                <th>終日</th>
+                <td>
+                    <% if @schedule.all_day == 1 %>◯<% end %>
+                </td>
+            </tr>
+            <tr>
+                <th>スケジュールメモ</th>
+                <td><%= @schedule.memo %></td>
+            </tr>
+        </table>
+    </div>
+</div>
